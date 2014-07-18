@@ -9,6 +9,7 @@
 #define ACOUSTIC_PACKET_STATE_H_
 
 #include <acomms_sim/AcousticModemData.h>
+#include <acomms_sim/time_interval.h>
 
 namespace acomms_sim
 {
@@ -19,27 +20,27 @@ protected:
 
   acomms_sim::AcousticModemData msg;
 
-  int numFrames;
+  int _numFrames;
 
-  long modemBusyStartTime;
+  long _modemBusyStartTime;
 
-  long modemBusyEndTime;
+  long _modemBusyEndTime;
 
-  long acousticStartTime;
+  long _acousticStartTime;
 
-  long acousticEndTime;
+  long _acousticEndTime;
 
-  long collisionWindowStartTime;
+  long _collisionWindowStartTime;
 
-  long collisionWindowEndTime;
+  long _collisionWindowEndTime;
 
-  long flightTime;
+  long _flightTime;
 
-  bool priorCollision;
+  bool _priorCollision;
 
-  bool transmitCorruption;
+  bool _transmitCorruption;
 
-  bool receiveCorruption;
+  bool _receiveCorruption;
 
   AcousticPacketState relatedPacket;
 
@@ -61,8 +62,19 @@ public:
   int getSlot();
   long getCollisionWindowStartTime();
   long getCollisionWindowEndTime();
-
-
+  acomms_sim::TimeInterval getModemBusyTimeInterval();
+  int getNetworkPosition();
+  void setNetworkPosition(int networkPosition);
+  void setCollision(bool priorCollision);
+  bool hasCollision();
+  int compareTo(AcousticPacketState o);
+  int compareOverlap(AcousticPacketState o);
+  std::string toString();
+  bool hasTransmitCorruption();
+  void setTransmitCorruption(bool transmitCorruption);
+  bool hasReceiveCorruption();
+  void setReceiveCorruption(bool receiveCorruption);
+  bool hasCorruption();
 };
 
 }// namespace acomms_sim
