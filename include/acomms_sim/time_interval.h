@@ -18,13 +18,13 @@ class TimeInterval
 {
 protected:
   // Start time of the interval
-  long startTime;
+  long _startTime;
 
   // End time of the interval
-  long endTime;
+  long _endTime;
 public:
   TimeInterval();
-  TimeInterval(long sTime, long eTime);
+  TimeInterval(long startTime, long endTime);
   long getStartTime();
   long getEndTime();
   int compareTo(TimeInterval o);

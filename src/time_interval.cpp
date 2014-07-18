@@ -14,7 +14,7 @@ TimeInterval::TimeInterval()
   //Empty constructor
 }
 
-TimeInterval::TimeInterval(long sTime, long eTime)
+TimeInterval::TimeInterval(long startTime, long endTime)
 {
   if (startTime > endTime)
   {
@@ -22,30 +22,30 @@ TimeInterval::TimeInterval(long sTime, long eTime)
     ss << "startTime after endTime (" << sTime << ", " << eTime << ")";
     throw std::invalid_argument(ss.str().c_str());
   }
-  startTime = sTime;
-  endTime = eTime;
+  _startTime = startTime;
+  _endTime = endTime;
 }
 
 long TimeInterval::getStartTime()
 {
-  return startTime;
+  return _startTime;
 }
 
 long TimeInterval::getEndTime()
 {
-  return endTime;
+  return _endTime;
 }
 
 int TimeInterval::compareTo(TimeInterval o) //TODO: Check implementation.
 {
-  if (startTime < o.startTime)
+  if (_startTime < o._startTime)
     return -1;
-  else if (startTime > o.startTime)
+  else if (_startTime > o._startTime)
     return 1;
 
-  else if (endTime < o.endTime)
+  else if (_endTime < o._endTime)
     return -1;
-  else if (endTime > o.endTime)
+  else if (_endTime > o._endTime)
     return 1;
 
   // Else they are the same interval.
@@ -58,7 +58,7 @@ bool TimeInterval::containsInstant(long instant)
   // An instant is contained within a TimeInterval if it is on or after
   // the start time, and before the end time.
   // So, necessarily a zero length TimeInterval can't contain any instants.
-  if (startTime <= instant && instant < endTime)
+  if (_startTime <= instant && instant < _endTime)
     return true;
   else
     return false;
@@ -67,10 +67,10 @@ bool TimeInterval::containsInstant(long instant)
 int TimeInterval::compareOverlap(TimeInterval o)
 {
   // Packet is after this.
-  if (o.startTime >= endTime)
+  if (o._startTime >= _endTime)
     return 1;
   // Packet is before this.
-  else if (o.endTime <= startTime)
+  else if (o._endTime <= _startTime)
     return -1;
   // Packet overlaps this.
   else
@@ -81,7 +81,7 @@ std::string TimeInterval::toString()
 {
   // Purposefully uses [a,b) notation.
   std::stringstream ss;
-  ss << "[" << startTime << ", " << endTime << ")";
+  ss << "[" << _startTime << ", " << _endTime << ")";
   return ss.str();
 }
 
