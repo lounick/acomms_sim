@@ -53,6 +53,23 @@ int TimeInterval::compareTo(TimeInterval o) //TODO: Check implementation.
     return 0;
 }
 
+int TimeInterval::endCompareTo(TimeInterval o)
+{
+  if (_endTime < o._endTime)
+    return -1;
+  else if (_endTime > o._endTime)
+    return 1;
+
+  else if (_startTime < o._startTime)
+    return -1;
+  else if (_startTime > o._startTime)
+    return 1;
+
+  // More comparison checks, or is that good enough?
+  else
+    return 0;
+}
+
 bool TimeInterval::containsInstant(long instant)
 {
   // An instant is contained within a TimeInterval if it is on or after
@@ -85,4 +102,4 @@ std::string TimeInterval::toString()
   return ss.str();
 }
 
-}//namespace acomms_sim
+}  //namespace acomms_sim

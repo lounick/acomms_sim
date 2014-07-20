@@ -18,6 +18,8 @@ class AcousticPacketState
 protected:
   static long nextUniquenessValue = 0;
 
+  long _uniquenessValue;
+
   acomms_sim::AcousticModemData msg;
 
   int _numFrames;
@@ -44,9 +46,9 @@ protected:
 
   AcousticPacketState relatedPacket;
 
-  int networkPosition;
+  int _networkPosition;
 
-  int slot;
+  int _slot;
 
   static const int NETWORK_POSITION_TX = 1;
   static const int NETWORK_POSITION_RX = 2;

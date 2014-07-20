@@ -28,6 +28,7 @@ public:
   long getStartTime();
   long getEndTime();
   int compareTo(TimeInterval o);
+  int endCompareTo(TimeInterval o);
   bool containsInstant(long instant);
   int compareOverlap(TimeInterval o);
   std::string toString();
